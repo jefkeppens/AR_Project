@@ -3,11 +3,15 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/race.dart';
 
-class PlayerApi {
+class RaceApi {
   static Future<List<Race>> fetchRaces() async {
     var url = Uri.https(globalServer, '/races');
 
-    final response = await http.get(url);
+    final response = await http.get(url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'ngrok-skip-browser-warning': '49654'
+      },);
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
@@ -20,7 +24,11 @@ class PlayerApi {
   static Future<Race> fetchRace(int id) async {
     var url = Uri.https(globalServer, '/races/$id');
 
-    final response = await http.get(url);
+    final response = await http.get(url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'ngrok-skip-browser-warning': '49654'
+      },);
     if (response.statusCode == 200) {
       return Race.fromJson(jsonDecode(response.body));
     } else {
@@ -35,6 +43,7 @@ class PlayerApi {
       url,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'ngrok-skip-browser-warning': '49654'
       },
       body: jsonEncode(race),
     );
@@ -52,6 +61,7 @@ class PlayerApi {
       url,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'ngrok-skip-browser-warning': '49654'
       },
       body: jsonEncode(race),
     );
@@ -66,7 +76,11 @@ class PlayerApi {
     var url = Uri.https(globalServer, '/races/$id');
     
     final http.Response response =
-        await http.delete(url);
+        await http.delete(url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'ngrok-skip-browser-warning': '49654'
+          },);
     if (response.statusCode == 200) {
       return;
     } else {

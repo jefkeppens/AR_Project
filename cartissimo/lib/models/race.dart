@@ -21,7 +21,7 @@ class Race {
     return Race(
       id: json['id'],
       name: json['name'],
-      difficulty: json['difficulty'],
+      difficulty: _difficultyFromString(json['difficulty']),
       distance: json['distance'],
       beforeTimeLimit: json['beforeTimeLimit']
     );
@@ -31,11 +31,25 @@ class Race {
   {
     'name': name,
     'difficulty': difficulty,
-    'distance': distance,
+    'distance': distance.toString(),
     'beforeTimeLimit': beforeTimeLimit
   };
+
+  static Difficulty _difficultyFromString(String difficulty) {
+    switch (difficulty.toLowerCase()) {
+      case 'easy':
+        return Difficulty.easy;
+      case 'moderate':
+        return Difficulty.moderate;
+      case 'hard':
+        return Difficulty.hard;
+      default:
+        throw ArgumentError('Unknown difficulty: $difficulty');
+    }
+  }
 }
 
 enum Difficulty {
   easy,moderate,hard;
 }
+

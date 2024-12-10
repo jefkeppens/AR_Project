@@ -16,9 +16,39 @@
       "optionIndex": 0
     },
     {
-      "id": 4,
       "name": "Magomed-Ali Dudayev",
-      "optionIndex": 0
+      "optionIndex": 0,
+      "id": 4
+    }
+  ],
+  "races": [
+    {
+      "id": 1,
+      "name": "Mountain Sprint",
+      "difficulty": "hard",
+      "distance": 5000,
+      "beforeTimeLimit": 45
+    },
+    {
+      "id": 2,
+      "name": "City Marathon",
+      "difficulty": "moderate",
+      "distance": 42000,
+      "beforeTimeLimit": 240
+    },
+    {
+      "id": 3,
+      "name": "Trail Adventure",
+      "difficulty": "hard",
+      "distance": 10000,
+      "beforeTimeLimit": 120
+    },
+    {
+      "id": 4,
+      "name": "Beach Run",
+      "difficulty": "easy",
+      "distance": 3000,
+      "beforeTimeLimit": 30
     }
   ]
 }

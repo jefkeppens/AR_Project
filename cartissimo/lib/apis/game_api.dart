@@ -7,7 +7,11 @@ class GameApi {
   static Future<List<Game>> fetchGames() async {
     var url = Uri.https(globalServer, '/games');
 
-    final response = await http.get(url);
+    final response = await http.get(url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'ngrok-skip-browser-warning': '49654'
+      },);
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
@@ -20,7 +24,11 @@ class GameApi {
   static Future<Game> fetchGame(int id) async {
     var url = Uri.https(globalServer, '/games/$id');
 
-    final response = await http.get(url);
+    final response = await http.get(url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'ngrok-skip-browser-warning': '49654'
+      },);
     if (response.statusCode == 200) {
       return Game.fromJson(jsonDecode(response.body));
     } else {
@@ -35,6 +43,7 @@ class GameApi {
       url,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'ngrok-skip-browser-warning': '49654'
       },
       body: jsonEncode(game),
     );
@@ -52,6 +61,7 @@ class GameApi {
       url,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'ngrok-skip-browser-warning': '49654'
       },
       body: jsonEncode(game),
     );
@@ -66,7 +76,11 @@ class GameApi {
     var url = Uri.https(globalServer, '/games/$id');
     
     final http.Response response =
-        await http.delete(url);
+        await http.delete(url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'ngrok-skip-browser-warning': '49654'
+        },);
     if (response.statusCode == 200) {
       return;
     } else {

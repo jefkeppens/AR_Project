@@ -1,4 +1,4 @@
 String? globalPlayerName;
-String globalServer = 'olive-walls-cough-103-181-349-27.loca.lt';
+String globalServer = 'e7b7-2a02-a03f-885e-8001-796c-5c9d-3330-fe95.ngrok-free.app';
 // json-server --watch
-// lt --subdomain olive-walls-cough-103-181-349-27 --port 3000
+// ngrok http http://localhost:3000
