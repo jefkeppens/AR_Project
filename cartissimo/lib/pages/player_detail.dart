@@ -1,3 +1,4 @@
+import 'package:cartissimo/pages/ar_page_customize_cart.dart';
 import 'package:flutter/material.dart';
 import '../models/player.dart';
 import '../apis/player_api.dart';
@@ -46,23 +47,6 @@ class _PlayerDetailPageState extends State<PlayerDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Player Homepage"),
-        actions: <Widget>[
-          PopupMenuButton<String>(
-            onSelected: _menuSelected,
-            itemBuilder: (BuildContext context) {
-              return choices.asMap().entries.map((entry) {
-                return PopupMenuItem<String>(
-                  value: entry.key.toString(),
-                  child: Text(entry.value),
-                );
-              }).toList();
-            },
-          ),
-        ],
-      ),
-      
       body: Container(
         padding: const EdgeInsets.all(5.0),
         child: _playerDetails(),
@@ -80,48 +64,82 @@ class _PlayerDetailPageState extends State<PlayerDetailPage> {
     nameController.text = player!.name; // Set the initial name in the TextField
 
     return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
+  padding: const EdgeInsets.all(10.0),
+  child: Column(
+    children: <Widget>[
+      // Add a button to go back at the top left
+      Align(
+        alignment: Alignment.topLeft,
+        child: ElevatedButton.icon(
+          onPressed: () {
+            Navigator.pop(context); // Go back to the previous page
+          },
+          icon: const Icon(Icons.arrow_back),
+          label: const Text("Back"),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.grey, // Optional: change button color
+          ),
+        ),
+      ),
+      const SizedBox(height: 20), // Add spacing between the top button and the form
+      TextField(
+        controller: nameController,
+        style: textStyle,
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+          labelText: "Name",
+          labelStyle: textStyle,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
+      ),
+      const SizedBox(height: 20), // Add space between the TextField and buttons
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          TextField(
-            controller: nameController,
-            style: textStyle,
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              labelText: "Name",
-              labelStyle: textStyle,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-              ),
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: ElevatedButton(
+              onPressed: _savePlayer,
+              child: Text(player!.id == 0 ? "Add" : "Update"),
             ),
           ),
-          const SizedBox(height: 20), // Add some space between the TextField and buttons
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                margin: const EdgeInsets.all(10),
-                child: ElevatedButton(
-                onPressed: _savePlayer,
-                child: Text(player!.id == 0 ? "Add" : "Update"),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                child: ElevatedButton(
-                onPressed: () {
-                  _confirmDelete();
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                child: const Text("Delete"),
-                ),
-              )
-              
-            ],
-          ),
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: ElevatedButton(
+              onPressed: () {
+                _confirmDelete();
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              child: const Text("Delete"),
+            ),
+          )
         ],
       ),
-    );
+      const SizedBox(height: 20), 
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ArPageCustomizeCart(player: player!)), // Replace `DifferentPage` with the actual page widget
+                );
+              },
+              child: const Text("Customize Cart"),
+            ),
+          )
+        ],
+      ),
+      
+    ],
+  ),
+);
+
   }
 }
 

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cartissimo/apis/player_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -73,13 +74,22 @@ class _ArPageCustomizeCartState extends State<ArPageCustomizeCart> {
     _unityWidgetController?.postMessage('TargetLocation', 'SetPlayerName', globalPlayerName);
   }
 
+  void _sendSceneName() {
+    _unityWidgetController?.postMessage('TargetLocation', 'SetSceneName', 'CustomizeScene');
+  }
+
   void onUnityMessage(message) {
     try {
       Map<String, dynamic> decodedMessage = json.decode(message);
-      String key = decodedMessage['index'];
+      int key = int.parse(decodedMessage['index']);
+      Player updatedPlayer = Player(name: 'name', id: 0, optionIndex: 0);
+      PlayerApi.fetchPlayer(widget.player.id).then((value) => updatedPlayer = value);
+      updatedPlayer.optionIndex = key;
+      PlayerApi.updatePlayer(widget.player.id, updatedPlayer);
+
       bool success = decodedMessage['success'];
 
-      if (key == "finished" && success) {
+      if (success) {
         // Show dialog
         showDialog(
           context: context,
@@ -91,6 +101,7 @@ class _ArPageCustomizeCartState extends State<ArPageCustomizeCart> {
                 TextButton(
                   child: const Text("OK"),
                   onPressed: () {
+                    Navigator.of(context).pop();
                     Navigator.of(context).pop();
                   },
                 ),
@@ -120,5 +131,6 @@ class _ArPageCustomizeCartState extends State<ArPageCustomizeCart> {
     _unityWidgetController = controller;
     _sendIndex();
     _sendPlayerName();
+    _sendSceneName();
   }
 }
