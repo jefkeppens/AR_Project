@@ -2,8 +2,8 @@
   "players": [
     {
       "name": "Jef Keppens",
-      "id": 1,
-      "optionIndex": 0
+      "optionIndex": 2,
+      "id": 1
     },
     {
       "id": 2,
@@ -11,9 +11,9 @@
       "optionIndex": 0
     },
     {
-      "id": 3,
       "name": "Marnick Michielsen",
-      "optionIndex": 0
+      "optionIndex": 2,
+      "id": 3
     },
     {
       "name": "Magomed-Ali Dudayev",

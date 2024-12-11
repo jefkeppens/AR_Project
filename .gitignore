@@ -10,6 +10,11 @@
 *.userosscache
 *.sln.docstates
 
+cartissimo/build/unitylibrary/
+cartissimo/android/unityLibrary/
+cartissimo/unity/Kartissimo/Library/
+Kartissimo/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -73,7 +78,6 @@ StyleCopReport.xml
 *_p.c
 *_h.h
 *.ilk
-*.meta
 *.obj
 *.iobj
 *.pch

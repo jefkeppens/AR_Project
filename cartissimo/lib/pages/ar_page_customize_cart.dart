@@ -65,26 +65,27 @@ class _ArPageCustomizeCartState extends State<ArPageCustomizeCart> {
 
   // Send chosen location to Unity!
   void _sendIndex() {
-    _unityWidgetController?.postMessage('TargetLocation', 'SetPlayerCart', 
+    _unityWidgetController?.postMessage('CartInput', 'SetPlayerCart', 
     jsonEncode(widget.player.optionIndex));
   }
 
-  // Send username to Unity!
-  void _sendPlayerName() {
-    _unityWidgetController?.postMessage('TargetLocation', 'SetPlayerName', globalPlayerName);
-  }
+  // // Send username to Unity!
+  // void _sendPlayerName() {
+  //   _unityWidgetController?.postMessage('TargetLocation', 'SetPlayerName', globalPlayerName);
+  // }
 
   void _sendSceneName() {
-    _unityWidgetController?.postMessage('TargetLocation', 'SetSceneName', 'CustomizeScene');
+    _unityWidgetController?.postMessage('OpenScene', 'LoadScene', 'CustomizeScene');
   }
 
   void onUnityMessage(message) {
     try {
       Map<String, dynamic> decodedMessage = json.decode(message);
-      int key = int.parse(decodedMessage['index']);
+      int key = int.parse(decodedMessage['key']);
       Player updatedPlayer = Player(name: 'name', id: 0, optionIndex: 0);
       PlayerApi.fetchPlayer(widget.player.id).then((value) => updatedPlayer = value);
       updatedPlayer.optionIndex = key;
+      updatedPlayer.name = widget.player.name;
       PlayerApi.updatePlayer(widget.player.id, updatedPlayer);
 
       bool success = decodedMessage['success'];
@@ -130,7 +131,7 @@ class _ArPageCustomizeCartState extends State<ArPageCustomizeCart> {
     controller.resume();
     _unityWidgetController = controller;
     _sendIndex();
-    _sendPlayerName();
+    // _sendPlayerName();
     _sendSceneName();
   }
 }
