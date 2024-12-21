@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI; // To access the Button component
-using System.Collections;
 
 public class CartColorChange : MonoBehaviour
 {
@@ -12,34 +11,20 @@ public class CartColorChange : MonoBehaviour
     public Button[] colorButtons; // Array of buttons to highlight
     public GameObject[] buttonBorders; // Array to hold the borders (the Image components on each button)
 
-    public int currentButtonIndex = -1; // Index of the currently selected button
-
-    private CartInput cartInput;
+    private int currentButtonIndex = -1; // Index of the currently selected button
 
     void Start()
     {
-        cartInput = FindObjectOfType<CartInput>();
         // Check if the arrays are properly set up
         if (cartRenderer == null || material1Colors.Length < 5 || material2Colors.Length < 5 || colorButtons.Length < 5 || buttonBorders.Length < 5)
         {
             Debug.LogError("Please assign the Renderer, set up at least 5 colors for both materials, and assign the buttons and borders!");
         }
 
-        StartCoroutine(DelayedAction());
-        
-        SelectButton(currentButtonIndex);
+        SelectButton(0);
 
         // Optionally, set initial button state (if needed)
         UpdateButtonHighlight();
-    }
-
-    private IEnumerator DelayedAction()
-    {
-        while(currentButtonIndex < 0) {
-            Debug.Log("Action started");
-            yield return new WaitForSeconds(1.0f); // Wait for 2 seconds
-            Debug.Log("Action resumed after delay");
-        }
     }
 
     public void ChangeCartColor(int buttonIndex)

@@ -4,9 +4,10 @@ using UnityEngine.SceneManagement;
 public class SceneTransition : MonoBehaviour
 {
     // Public field to set the scene name in the Inspector
+    public string sceneName; // The scene to load
 
     // Method to load the scene
-    public void LoadScene(string sceneName)
+    public void LoadScene()
     {
         if (!string.IsNullOrEmpty(sceneName))
         {
