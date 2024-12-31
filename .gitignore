@@ -10,10 +10,10 @@
 *.userosscache
 *.sln.docstates
 
-cartissimo/build/unitylibrary/
-cartissimo/android/unityLibrary/
-cartissimo/unity/Kartissimo/Library/
-backup/
+kartissimo/build/unitylibrary/
+kartissimo/android/unityLibrary/
+kartissimo/unity/elen/Library/
+kartissimo/unity/elen/Builds/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
